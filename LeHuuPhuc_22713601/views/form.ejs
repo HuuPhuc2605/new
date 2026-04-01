@@ -1,0 +1,33 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<div class="p-10 gap-10">
+<h1><%= ticket ? "Cập nhật": "Thêm"%></h1>
+<a href="/">Quay lại</a>
+<form action="/tickets<%= ticket? '/' + ticket.ticketId : ''%>" method="post" enctype="multipart/form-data" class="space-y-4">
+    <!-- eventName -->
+    <input type="text" name="eventName" placeholder="Tên sự kiện..." value="<%= ticket?.eventName || ''%>" required><br/>
+
+    <!-- holderName -->
+     <input type="text" name="holderName" placeholder="Chủ sở hữu sự kiện..." value="<%= ticket?.holderName || ''%>" required><br/>
+<select name="category" required>
+<option value="">Chọn loại</option>
+<option value="Standard " <%= ticket?.category === "Standard" ? "selected" : '' %>>Standard </option>
+                <option value="VIP"  <%= ticket?.category === "VIP" ? "selected" : '' %>>VIP  </option>
+        <option value="VVIP " <%= ticket?.category === "VVIP" ? "selected" : '' %>>VVIP </option>
+</select><br/>
+ <input type="date" name="eventDate" placeholder="Ngày bắt đầu..." value="<%= ticket?.eventDate ? ticket.eventDate.split('T')[0] : '' %>" required><br/>
+  <input type="date" name="createdAt" placeholder="Ngày tạo..." value="<%= ticket?.createdAt ? ticket.createdAt.split('T')[0] : '' %>" required><br/>
+     <!-- quantity -->
+    Số lượng: <input min="0" type="number" name="quantity" placeholder="Số lượng..." value="<%= ticket?.quantity || ''%>"required><br/>
+
+    <!-- pricePerTicket -->
+      Giá vé: <input min="0" type="number" name="pricePerTicket" placeholder="Giá vé..." value="<%= ticket?.pricePerTicket || ''%>" required><br/>
+
+      <% if(ticket?.imageUrl){%>
+        <img src="<%= ticket.imageUrl%>" alt="Ảnh sản phẩm">
+        <%}%>
+            <input  type="file" name="imageUrl" ><br/>
+        
+        <button type="submit">Lưu</button>
+</form>
+</div>
+</div>

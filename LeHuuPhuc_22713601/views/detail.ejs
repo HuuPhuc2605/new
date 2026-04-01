@@ -1,0 +1,24 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<div class="p-10">
+  <a href="/">Quay lại</a>
+
+  <div class="bg-white shadow rounded p-6">
+    <img src="<%= ticket.imageUrl %>" class="h-60 w-full object-cover mb-4" />
+
+    <h2 class="text-2xl font-bold mb-2"><%= ticket.eventName %></h2>
+    <p>Chủ sở hữu: <%= ticket.holderName %></p>
+    <p>Loại vé: <%= ticket.category %></p>
+    <p>Ngày sự kiện: <%= ticket.eventDate %></p>
+    <p>Số lượng: <%= ticket.quantity %></p>
+    <p>Giá vé: <%= ticket.pricePerTicket %></p>
+    <p>Tổng tiền: <%= ticket.totalAmount %></p>
+    <p>Thành tiền: <%= ticket.finalAmount %></p>
+    <p><%= ticket.discountLabel %></p>
+    <p
+      class="<%= ticket.status === 'Còn vé' ? 'text-green-600 font-bold' : ticket.status === 'Sắp hết' ? 'text-yellow-600 font-bold' : ticket.status === 'Hết vé' ? 'text-red-600 font-bold' : 'text-gray-600' %>"
+    >
+      Tình trạng: <%= ticket.status %>
+    </p>
+    <p>Ngày tạo: <%= ticket.createdAt %></p>
+  </div>
+</div>

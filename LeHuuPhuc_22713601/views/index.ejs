@@ -1,0 +1,61 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<div class="p-10 gap-10">
+<!-- Tim kiem -->
+<form action="/" method="get">
+  <input type="text" name="w" value="<%= w || ""%>" placeholder="Nhập tên hay chủ sở hữu cần tìm kiếm ...">
+  <button type="submit">Tìm</button>
+</form>
+<a href="/">Load lại</a>
+
+<a href="/form">Thêm sự kiện</a>
+<!-- Lọc theo trạng thái -->
+<form action="/" method="get" class="mt-4">
+  <select name="status">
+    <option value="">-- Chọn trạng thái --</option>
+    <option value="Còn vé" <%= w === "Còn vé" ? "selected" : "" %>>Còn vé</option>
+    <option value="Sắp hết" <%= w === "Sắp hết" ? "selected" : "" %>>Sắp hết</option>
+    <option value="Hết vé" <%= w === "Hết vé" ? "selected" : "" %>>Hết vé</option>
+  </select>
+  <button type="submit">Lọc</button>
+</form>
+
+<!-- Danh sach -->
+<div class="grid grid-cols-3 gap-6 p-6">
+  <% tickets.forEach(t => { %>
+    <div class="bg-green-100 shadow rounded">
+      <% if (t.imageUrl) { %>
+        <img src="<%= t.imageUrl %>" class="h-40 w-full object-cover">
+      <% } %>
+      <div class="p-4">
+        <h2 class="text-lg font-bold"><%= t.eventName %></h2><br/>
+        <p class="text-gray-600"><%= t.holderName %></p><br/>
+        <p class="text-sm text-blue-500"><%= t.category %></p>
+          <p class="text-sm text-blue-500">giá tiền: <%= t.pricePerTicket %></p>
+
+       <p>Tổng tiền: <%= t.totalAmount || 0 %></p>
+<p>Thành tiền: <%= t.finalAmount || t.totalAmount %></p>
+<p class="<%= 
+  t.discountLabel === 'Không giảm giá' ? 'text-green-600 font-bold' : 
+  t.discountLabel === 'Được giảm giá' ? 'text-red-600 font-bold' : 
+  'text-gray-600' %>"><%= t.discountLabel || "Không giảm giá" %></p>
+<p class="<%= 
+  t.status === 'Còn vé' ? 'text-green-600 font-bold' : 
+  t.status === 'Sắp hết' ? 'text-yellow-600 font-bold' : 
+  t.status === 'Hết vé' ? 'text-red-600 font-bold' : 
+  'text-gray-600' %>">
+  Tình trạng: <%= t.status || "Không rõ" %>
+</p>        <div class="flex flex-row gap-10">
+  <a href="/detail/<%= t.ticketId %>">Xem chi tiết</a>
+
+          <a href="/form/<%= t.ticketId%>">Cập nhật</a>
+          <form action="/tickets/delete/<%= t.ticketId %>" method="post">
+            <button type="submit" onclick="return confirm('bạn có chắc xóa không?')">xóa</button>
+          </form>
+        </div>
+        
+
+      </div>
+    </div>
+  <% }) %>
+</div>
+</div>
