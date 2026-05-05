@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="p-5 bg-gray-100">
+
+<a th:href="@{/courses}" class="text-blue-600">quay lại</a>
+
+<h1 class="font-bold text-xl my-3">Chi tiết</h1>
+
+<form th:action="@{/courses}" method="post"
+      th:object="${course}"
+      class="bg-white p-4 w-96 shadow rounded">
+
+    <input type="hidden" th:field="*{id}">
+
+    <input th:field="*{name}" placeholder="Name"
+           class="border p-1 w-full mb-2">
+
+    <input th:field="*{instructor}" placeholder="Instructor"
+           class="border p-1 w-full mb-2">
+
+    <input th:field="*{category}" placeholder="Category"
+           class="border p-1 w-full mb-2">
+
+    <input th:field="*{price}" type="number" placeholder="Price"
+           class="border p-1 w-full mb-2">
+
+    <input th:field="*{duration}" type="number" placeholder="Duration"
+           class="border p-1 w-full mb-2">
+
+    <input th:field="*{imageUrl}" placeholder="Image URL"
+           class="border p-1 w-full mb-3">
+
+    <button class="bg-green-500 text-white px-3 py-1 w-full">
+        Lưu
+    </button>
+
+</form>
+
+</body>
+</html>
